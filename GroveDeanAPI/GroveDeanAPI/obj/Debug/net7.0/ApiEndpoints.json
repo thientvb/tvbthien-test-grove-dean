@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "GroveDeanAPI.Controllers.CatController",
+    "Method": "GetCatData",
+    "RelativePath": "api/cat/{endpoint}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "endpoint",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GroveDeanAPI.Model.CatInfo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

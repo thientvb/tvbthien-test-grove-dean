@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CAT DATA</title>
+    <style>
+        #cat-data {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        #apiUrl {
+            width: 268px;
+            margin-bottom: 5px;
+        }
+
+        img {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cat Information</h1>
+
+    <label for="apiUrl">API URL:</label>
+    <input type="text" id="apiUrl" value="https://localhost:44391/api/cat">
+    <br />
+    <label for="endpoint">Endpoint:</label>
+    <input type="text" id="endpoint" value="0XYvRd7oD">
+
+    <button onclick="fetchCatData()">Fetch Cat Data</button>
+
+    <div id="cat-data"></div>
+
+    <script>
+        function fetchCatData() {
+            var endpoint = document.getElementById('endpoint').value;
+            var apiUrl = document.getElementById('apiUrl').value;
+
+            fetch(`${apiUrl}/${endpoint}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Parse and display data
+                    displayCatData(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching cat data:', error);
+                });
+        }
+
+        function displayCatData(catInfo) {
+            // Access catInfo properties and update HTML content
+            var catDataDiv = document.getElementById('cat-data');
+
+            var imageUrl = catInfo.url;
+            var breedName = catInfo.breeds[0].name;
+            var description = catInfo.breeds[0].description;
+
+            var htmlContent = `
+                        <img src="${imageUrl}" alt="${breedName}">
+                        <h2>${breedName}</h2>
+                        <p>${description}</p>
+                    `;
+
+            catDataDiv.innerHTML = htmlContent;
+        }
+    </script>
+</body>
+</html>
